@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vars SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
 <vars>
-    <var name="product" value="CacheLink"/>
+    <var name="product" value="CacheLink Proxy"/>
+
+    <var name="github_url" value="https://github.com/24HOURSMEDIA/docker-cachelink-proxy" />
+    <var name="documentation_url" value="https://24hoursmedia.github.io/docker-cachelink-proxy" />
+    <var name="issues_url" value="https://github.com/24HOURSMEDIA/docker-cachelink-proxy/issues" />
+    <var name="dockerhub_url" value="https://hub.docker.com/r/24hoursmedia/cachelink-proxy" />
+
+    <!-- image to use in examples -->
+    <var name="example_docker_image" value="24hoursmedia/cachelink-proxy:1.0.0-nginx1.25-alpine3.18-slim" />
 </vars>
