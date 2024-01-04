@@ -6,6 +6,7 @@
                  name="docs"
                  start-page="CacheLink-Proxy.md">
 
+    <toc-element topic="Roadmap.md"/>
     <toc-element topic="CacheLink-Proxy.md"/>
     <toc-element topic="Configuration.md">
         <toc-element topic="Global-Configuration.md"/>
