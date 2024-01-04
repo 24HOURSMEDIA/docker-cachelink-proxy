@@ -10,6 +10,7 @@ env:
   # Where to find the ZIP file to deploy to Github Pages
   ZIP_FILE: ./docs/webHelpDOCS2-all.zip
 
+
 # permissions:
 permissions:
   id-token: write
