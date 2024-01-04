@@ -3,7 +3,7 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
 <instance-profile id="docs"
-                 name="docs"
+                 name="CacheLink docs"
                  start-page="CacheLink-Proxy.md">
 
     <toc-element topic="Roadmap.md"/>
