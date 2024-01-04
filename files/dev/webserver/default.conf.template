@@ -1,0 +1,13 @@
+server {
+
+    listen 8080;
+    
+    root /www;
+
+    location / {
+         if ($arg_c = "expires20") {
+            add_header cache-control "public, max-age=30";
+         }
+    }
+
+}

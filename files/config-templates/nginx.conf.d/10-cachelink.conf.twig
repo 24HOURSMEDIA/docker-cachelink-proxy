@@ -1,0 +1,49 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+{% set DEBUG = "DEBUG" | value("false") %}
+{% set DEBUG = DEBUG | boolify %}
+# CacheLink Proxy {% if DEBUG %}(debug mode){% endif %}
+
+{#### DEFAULTS ####}
+{% set DEFAULT_TTL = DEFAULT_TTL | default(60) %}
+{% set DEFAULT_STRATEGY = DEFAULT_STRATEGY | default("obey") %}
+{% set DEFAULT_TIMEOUT = DEFAULT_TIMEOUT | default(120) %}
+{% set DEFAULT_CONNECT_TIMEOUT = DEFAULT_CONNECT_TIMEOUT | default(30) %}
+{% if DEBUG %}{% include "_partials/debug_defaults.twig" %}{% endif %}
+
+{#### CACHE CONFIGS ####}
+{% set default_config = {
+    PORT: null,
+    BACKEND: null,
+    STRATEGY: DEFAULT_STRATEGY,
+    TTL: DEFAULT_TTL,
+    TIMEOUT: DEFAULT_TIMEOUT,
+    CONNECT_TIMEOUT: DEFAULT_CONNECT_TIMEOUT
+} %}
+{% set configs = "CACHE" | objects_from_prefix(10, default_config) %}
+{% if DEBUG %}{% include "_partials/debug_configs.twig" %}{% endif %}
+
+{#### VALIDATE CONFIGS ####}
+{% for config in configs %}
+{% set name = "cachelink" ~ loop.index %}
+{% if config.PORT | length == 0 %}{{ ("you forgot to specify a port in config " ~ name) | fatality }}{% endif %}
+{% if config.BACKEND | length == 0 %}{{ ("you forgot to specify a backend in config " ~ name) | fatality }}{% endif %}
+{% endfor %}
+
+
+{#### GENERATE ZONES ####}
+{% for config in configs %}
+{% set name = "cachelink" ~ loop.index %}
+{% set zone_name = name ~ "_zone" %}
+{% include "_partials/zone.twig" with {name: name, zone_name: zone_name, config: config} %}
+{% endfor %}
+
+{#### GENERATE SERVERS ####}
+{% for config in configs %}
+{% set name = "cachelink" ~ loop.index %}
+{% set zone_name = name ~ "_zone" %}
+{% include "_partials/server.twig" with {name: name, zone_name: zone_name, config: config} %}
+{% endfor %}
+
+{% endblock %}

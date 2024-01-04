@@ -1,0 +1,22 @@
+{% macro cache_with_strategy(config) %}
+    {% set strategy = config.STRATEGY | upper %}
+    {% set strategy_found = false %}
+    {% if strategy == "FORCE" %}
+        {% set strategy_found = true %}
+        # Caching strategy {{ strategy }}
+        proxy_cache_valid 200 {{ config.TTL }};
+        proxy_cache_valid 301 {{ config.TTL }};
+        proxy_cache_valid 302 {{ config.TTL }};
+        proxy_cache_valid 302 {{ config.TTL }};
+    {% endif %}
+    {% if strategy == "OBEY" %}
+        {% set strategy_found = true %}
+        # Caching strategy {{ strategy }}
+    {% endif %}
+    
+    {% if not strategy_found %}
+    {% set error = "cache strategy `" ~ strategy ~ "` is not supported!" %}
+    {{ error | fatality }}
+    {% endif %}
+
+{% endmacro %}

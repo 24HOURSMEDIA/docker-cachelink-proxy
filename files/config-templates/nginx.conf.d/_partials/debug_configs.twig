@@ -1,0 +1,5 @@
+# CONFIGS:
+# Default config: {{ default_config | json_encode }}
+{% for config in configs %}# Config #{{ loop.index }}: {{ config | json_encode }}
+{% endfor %}
+
